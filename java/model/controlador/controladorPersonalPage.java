@@ -49,7 +49,7 @@ public class controladorPersonalPage extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //instanciação do construtor da classe PersonalInformation com os respectivos argumentos
-            PersonalInformation pI=new PersonalInformation("António", "Rodrigues", "António Rodrigues", "964811996", 
+            PersonalInformation pI=new PersonalInformation("António", "Rodrigues", "António Rodrigues", "000000000", 
             "antonio.n.rodrigues@gmail.com", "Português", "1981/03/06", "Male");
           
             /* Instanciacao do construtor sem argumentos da classe 
