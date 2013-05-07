@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="CSS/antonionrodrigues.css" type="text/css" media="screen"/>
         <link rel="shortcut icon" type="image/x-icon" href="Imagens/simbol.ico">
         <script src="JS/antonionrodrigues.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="JS/antonionrodriguesJQUERY.js" type="text/javascript"></script>
         <title>António Rodrigues</title>
     </head>
     
@@ -73,6 +75,8 @@
         </header>
                             
         <div id="mainContent">
+            
+           
             <article>
                 <h1>WebPage</h1>
                 <img id="imagemSite" src="Imagens/FrontPage.jpg">
@@ -99,6 +103,8 @@
                    De referir que o trabalho de agarrar o evento 'onclick' 
                    de cada botão, abrir uma nova página com a textarea é 
                    feito através de código javascript.
+                   
+                  
                 </p>    
                 <c:forEach var ="nome" items="${read.listaJavaOutraPasta}">
                     <button id=${nome} class='buttonJavaSite' type="submit" value="OK"  
@@ -119,6 +125,7 @@
                     </button>
                </c:forEach> 
                <br><a id="aGitHub" href="https://github.com/AntonioNRodrigues/Curriculo" target="_blank" title="visualize o codigo na GitHub">Source Code</a>
+              <div class="fadeInFadeOut"> </div>
             </article>
                     
             <article>
@@ -134,18 +141,20 @@
                         ${nomeClasse}ava</button>
                </c:forEach>
             <br><a id="aGitHub" href="https://github.com/AntonioNRodrigues/CodingBat" target="_blank" title="visualize o codigo na GitHub">Source Code</a>
+            <div class="fadeInFadeOut1"> </div>
             </article>
-            
             <article>
                 <h1 id='euro'>Euromilhoes</h1>
-                <p>Código que permite obter a chave do euro milhões</p>
-                <p id="listaNumEstrela"><b>${estrela.sortedT} ${numero.set}</b></p> 
-                <button id="estrelaCode" onclick="var id6=document.getElementById(id);showTextAreaEuromilhoes(id6);">Estrela Código</button>
-                <button id="numCode" onclick="var id6=document.getElementById(id);showTextAreaEuromilhoes(id6);">Numero Código</button>
-              
+                <button id="gerarCodigo">Gera a tua chave do euromilhões</button><p></p>
+                <div style="display: none" id="euroWindow"><p id="listaNumEstrela"><b>Estrelas:</b> ${estrela.sortedT} <br> <b>Números: </b>${numero.set}</p> </div>
+                <button id="Estrela.j" class="buttonCodingbat" onclick="var id6=document.getElementById(id);showTextArea(id6, 'javaCodingbat');">Código Estrela</button>
+                <button id="Numero.j" class="buttonCodingbat" onclick="var id6=document.getElementById(id);showTextArea(id6, 'javaCodingbat');">Código Número</button>
                 <br><a id="aGitHub" href="https://github.com/AntonioNRodrigues/Euromilhoes" target="_blank" title="visualize o codigo na GitHub">Source Code</a>
-            </article>
                 
+                
+                <div class="fadeInFadeOut2"> </div>
+            </article>
+              
         </div>
        
             <div id="classes" style="display:none">

@@ -196,35 +196,6 @@ function decrescer(idEleDecresce, id){
  *                                                  *           
  ****************************************************/
 
-/* Função que trata dos clicks dos botões do article do euromilhoes 
- * Abre uma nova janela no browser com o respectivo conteudo. 
- * Inicialização de duas variaveis através do id--> numCode e do estrelaCode
- * verificação da condição comparando o id recebido como os dois iniciados 
- * e abre uma nova janela com o conteudo correspondete. 
- * */    
-function showTextAreaEuromilhoes(id){
-    var id1=document.getElementById('numCode');
-    var id2=document.getElementById('estrelaCode');
-    var indexEstrela=5;
-    var indexNumero=20;
-  
-    if(id===id1){
-            var pp=document.getElementsByTagName('textarea')[indexNumero];
-                    var newWindow=window.open('', '', 'width=600, height=530');
-                    var tmp=newWindow.document;
-                    tmp.write('<body style="background-color: black;">');
-                    tmp.write('<textarea id="i" rows="30" cols="70" readonly="readonly">'+pp.innerHTML+'</textarea>');
-                    tmp.write('</body>');
-    }else if(id===id2){
-        var pp=document.getElementsByTagName('textarea')[indexEstrela];
-                    var newWindow=window.open('', '', 'width=600, height=530');
-                    var tmp=newWindow.document;
-                    tmp.write('<body style="background-color: black;">');
-                    tmp.write('<textarea id="i" rows="30" cols="70" readonly="readonly">'+pp.innerHTML+'</textarea>');
-                    tmp.write('</body>');
-    }
-}
-
 /* Função que trata dos clicks dos botões dos diferentes butões da pagina
  * função que recebe dois argumentos: o id para saber qual foi o botão clicado 
  * e uma variavel de controlo para saber que a que class tem que ir procurar 
@@ -265,6 +236,7 @@ function showTextArea(id, contr){
             }
         }
     }else if(contr==='javaCodingbat'){
+        
         for(var i=0; i<myClasses.length; i++){
             myClasses[i]=document.getElementsByClassName('buttonCodingbat')[i];    
             if(myClasses[i]===id){
@@ -277,4 +249,18 @@ function showTextArea(id, contr){
             }
         }
     }
+ 
 }  
+    
+    /*função que permite ao clicar no botão com o id de gerarCodigo obter 
+     * uma nova janela com com o conteudo do jogo do euromilhoes do div com o 
+     * id de gerarCodigo que num estado default de display: none
+     * FUNÇÃO NÃO UTILIZADA COM A INCLUSÃO DAS ANIMAÇÕES COM O JQUERY
+     
+    function gerarCodigoEuro(id){
+        var p=document.getElementById(id);
+        var newWindow=window.open('','','width=200, height=50');
+        var tmp=newWindow.document;
+        tmp.write(p.innerHTML);
+    } 
+*/
