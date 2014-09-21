@@ -15,39 +15,23 @@
         <meta name="google-site-verification" content="K-ymv6-X1npnBub3M05ZAw9pIAMrToUYhnnamS82DmQ" />
         <title>António Rodrigues</title>
     </head>
-   
+
     <body id="frontPage">
-        
+
         <img id="imagemBackground" src="Imagens/FrontPage.jpg" alt="WorkSpace" usemap="#imageMap">
-            <%--<map name="imageMap"> 
-                <area id="um" shape="rect" coords="30,300,270,440" 
-                      onmouseover="popIn('um', 'back1','aboutMeText');" 
-                      onmouseout="normal('um','back1','aboutMeText');">
+        <img id="imagemAboutMe" hidden="#" alt="Imagem da pagina AboutMe" src="Imagens/aboutMe.jpg"> 
+        <img id="imagemPCurriculum" hiden="#" alt="Imagem da pagina PageCurriculum" src="Imagens/PageCurriculo.jpg" >
+        <img id="imagemJavaWork" hiden="#" alt="Imagem da pagina javaWork" src="Imagens/javaWork.jpg" >
 
-                <area id="dois" shape="rect" coords="320,40,660,260" 
-                      onmouseover="popIn('dois', 'back2', 'javaWorkText');" 
-                      onmouseout="normal('dois','back2', 'javaWorkText');">
+        <div id="linksEntrada" >
+            <a href="AboutMe.jsp" onmouseover="popIn2('imagemAboutMe');" onmouseout="normal2('imagemAboutMe');">About Me</a>
+            <a href="ControladorPersonalPage" onmouseover="popIn2('imagemPCurriculum');" onmouseout="normal2('imagemPCurriculum');">Curriculum</a>
+            <a href="Projects.jsp" onmouseover="popIn2('imagemJavaWork');" onmouseout="normal2('imagemJavaWork');">Projects</a>
+        </div>
 
-                <area id="tres" shape="rect" coords="720,90,945,240"
-                      onmouseover="popIn('tres', 'back3', 'pageCurriculumText');" 
-                      onmouseout="normal('tres','back3', 'pageCurriculumText');">
-      
-            </map>--%>
-            
-               <img id="imagemAboutMe" hidden="#" alt="Imagem da pagina AboutMe" src="Imagens/aboutMe.jpg"> 
-               <img id="imagemPCurriculum" hiden="#" alt="Imagem da pagina PageCurriculum" src="Imagens/PageCurriculo.jpg" >
-               <img id="imagemJavaWork" hiden="#" alt="Imagem da pagina javaWork" src="Imagens/javaWork.jpg" >
-
-              <div id="linksEntrada" >
-                  <a href="AboutMe.jsp" onmouseover="popIn2('imagemAboutMe');" onmouseout="normal2('imagemAboutMe');">Sobre Mim</a>
-                  <a href="controladorPersonalPage" onmouseover="popIn2('imagemPCurriculum');" onmouseout="normal2('imagemPCurriculum');">Currículo</a>
-                  <a href="Work_in_Java_NewVersion.jsp" onmouseover="popIn2('imagemJavaWork');" onmouseout="normal2('imagemJavaWork');">Projectos</a>
-              </div>
-              
-        
-     <footer id="footerFrontPage">
-         <p><a href="AboutMe.jsp" target="_blank"> <span style="font-size: 20px">&copy;</span> António Rodrigues 2013</a></p>
-     </footer>
+        <footer id="footerFrontPage">
+            <p><a href="AboutMe.jsp" target="_blank"> <span style="font-size: 20px">&copy;</span> António Rodrigues 2013-2014</a></p>
+        </footer>
     </body>
-    
+
 </html>
