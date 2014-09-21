@@ -29,22 +29,23 @@ public class ReadTextBeanFormat{
 
   
     
-    //construtor
+    /**
+     * 
+     */
     public ReadTextBeanFormat() {
-      setPath(ReadTextDefinePath.getPathAUTO());
-      textTxtInListTXT= new StringBuilder();
+      setPath(ReadTextDefinePath.getListaPaths().get(0));
+      textTxtInListTXT = new StringBuilder();
       setListaTXT(listaTXT);
       setTextTxtInListTXT(textTxtInListTXT);
       
     }
-
+    public String getPath(){
+        return Path;
+    }
     
-public String getPath(){
-    return Path;
-}
-public void setPath(String Path2){
-    this.Path=Path2;
-}
+    public void setPath(String Path2){
+        this.Path = Path2;
+    }
 
     public int getIndex() {
         return index;
@@ -63,16 +64,16 @@ public void setPath(String Path2){
      * para uma StringBuilder.
      */
     public void setTextTxtInListTXT(StringBuilder textTxtInListTXT) {
-            String temp3=null;
-            List l= getListaTXT();
+            String temp3 = null;
+            List lista = getListaTXT();
             BufferedReader ler;
             
-            for(Object o:l){
+            for(Object o : lista){
                 try {
-                    String temp=(String)o;
-                    File ficheiros= new File(folder, temp);           
-                    ler=new BufferedReader(new FileReader(ficheiros));
-                    while((temp3=ler.readLine())!=null){
+                    String temp = (String)o;
+                    File ficheiros = new File(folder, temp);           
+                    ler = new BufferedReader(new FileReader(ficheiros));
+                    while((temp3=ler.readLine())!= null){
                         textTxtInListTXT.append(temp3 + "\n");
                     }
                 } catch (IOException ex) {
@@ -80,11 +81,9 @@ public void setPath(String Path2){
                 } 
                 }
           this.textTxtInListTXT = textTxtInListTXT;   
-            
     }
 
     public ArrayList getListaTXT() {
-        
         return listaTXT;
     }
 

@@ -3,7 +3,7 @@
  * pelo Work_in_JavaNewVersion.jsp através do @Override do init(). 
  * Nesse momento é criada uma instancia da classe ReadTextDefinePath. 
  * Essa informação da classe ReadTextDefinePath serve para iniciar 
- * os argumentos path e pathOther.
+ * os argumentos pathAUTO, pathAUTOClassesSite e pathAUTOFcul. 
  * Cada um dos atributos, através do respectivo metodo set, 
  * passa pelo metodo lerConteudoPasta ou pelo metodo 
  * lerConteudoFicheiro para que as respectivas listas sejam preenchidas.
@@ -15,196 +15,163 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * @author António Rodrigues
+ * @version 3.0
  */
-public class ReadingSimpleWay {
-    private String path;
-    private String pathOther;
-    private ArrayList listaJavaPasta;
-    private ArrayList listaJavaOutraPasta;
-    private ArrayList listaJSPOutrasPasta;
-    private ArrayList<StringBuilder> listaCompletaJavaPasta;
-    private ArrayList<StringBuilder> listaCompletaJavaOutraPasta;
-    private ArrayList<StringBuilder> listaCompletaJSPOutraPasta;
-    
-    /*construtor
-     * inicialização de todos os atributos bem como dos respectivos set de 
-     * cada um. inicializa também as atributos path e pathOther através da 
+public final class ReadingSimpleWay {
+
+    /**
+     * ArrayList com as paths dos pastas a ler
+     */
+    private ArrayList<String> listaPaths;
+    /**
+     * lista de listas que contem os nomes dos ficheiros que estao presentes na
+     * pasta
+     */
+    private ArrayList<ArrayList<String>> listaNomesFicheirosDeCadaPasta;
+    /**
+     * lista de listas que contem o conteudo de cada ficheiro que esta presente
+     * na pasta
+     */
+    private ArrayList<ArrayList<StringBuilder>> listaConteudoFicheiroDeCadaPasta;
+
+    /**
+     * Inicialização de todos os atributos bem como dos respectivos set de cada
+     * um. inicializa também as atributos path, pathOther e pathFcul através da
      * classe ReadTextDefinePath.
      */
     public ReadingSimpleWay() {
-        
-        listaJavaPasta = new ArrayList();
-        listaCompletaJavaPasta = new  ArrayList<StringBuilder>();
-        listaJSPOutrasPasta= new ArrayList();
-        listaCompletaJSPOutraPasta = new ArrayList<StringBuilder>();
-        listaJavaOutraPasta= new ArrayList();
-        listaCompletaJavaOutraPasta= new ArrayList<StringBuilder>();
-        setPath(ReadTextDefinePath.getPathAUTO());
-        setPathOther(ReadTextDefinePath.getPathAUTOClassesSite());
-        setListaJavaPasta(listaJavaPasta);
-        setListaCompletaJavaPasta(listaCompletaJavaPasta);
-        setListaJSPOutrasPasta(listaJSPOutrasPasta);
-        setListaCompletaJSPOutraPasta(listaCompletaJSPOutraPasta);
-        setListaJavaOutraPasta(listaJavaOutraPasta);
-        setListaCompletaJavaOutraPasta(listaCompletaJavaOutraPasta);
+        listaPaths = ReadTextDefinePath.getListaPaths();
+        setListaConteudoFicheiroDeCadaPasta(new ArrayList<ArrayList<StringBuilder>>());
+        setListaNomesFicheirosDeCadaPasta(new ArrayList<ArrayList<String>>());
+        populateLista();
+
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getPathOther() {
-        return pathOther;
-    }
-
-    public void setPathOther(String pathOther) {
-        this.pathOther = pathOther;
-    }
-
-    public ArrayList getListaJavaPasta() {
-        return listaJavaPasta;
-    }
-    /* Set do atributo listaJavaPasta que ira chama o metodo lerConteudoPasta 
-     * para preencher a Lista com o conteúdo referente à pasta definida na 
-     * atributo path. atributo de controlo para durante o ciclo do metodo 
-     * lerConteudoPasta saber que ficheiros ha-de adicionar a Lista.
+    /**
+     * Getter dio parametro NomesFicheirosDeCadaPasta
+     *
+     * @return NomesFicheirosDeCadaPasta
      */
-    public void setListaJavaPasta(ArrayList listaJavaPasta) {
-        String controlo="java";
-        this.listaJavaPasta = lerConteudoPasta(listaJavaPasta, getPath(), controlo);
+    public ArrayList<ArrayList<String>> getListaNomesFicheirosDeCadaPasta() {
+        return listaNomesFicheirosDeCadaPasta;
     }
 
-    public ArrayList<StringBuilder> getListaCompletaJavaPasta() {
-        return listaCompletaJavaPasta;
-    }
-      /* Set do atributo ListaCompletaJavaPasta que ira chamar o metodo 
-     * lerConteudoFicheiro para preencher a Lista com o conteúdo referente 
-     * à lista e à path definidos nos argumentos desse metodo.
+    /**
+     * Getter do parametro ListaConteudoFicheiroDeCadaPasta
+     *
+     * @return ListaConteudoFicheiroDeCadaPasta
      */
-    public void setListaCompletaJavaPasta(ArrayList<StringBuilder> listaCompletaJavaPasta) {
-        this.listaCompletaJavaPasta = lerConteudoFicheiro(listaJavaPasta, getPath());
+    public ArrayList<ArrayList<StringBuilder>> getListaConteudoFicheiroDeCadaPasta() {
+        return listaConteudoFicheiroDeCadaPasta;
     }
 
-    public ArrayList getListaJSPOutrasPasta() {
-        return listaJSPOutrasPasta;
-    }
-    /* Set do atributo ListaJSPOutrasPasta que ira chama o metodo lerConteudoPasta 
-     * para preencher a Lista com o conteúdo referente a pasta definida na 
-     * atributo path. atributo de controlo para durante o ciclo do metodo 
-     * lerConteudoPasta saber que ficheiros ha-de adicionar à Lista.
+    /**
+     * Setter do parametro listaNomesFicheirosDeCadaPasta
+     *
+     * @param listaNomesFicheirosDeCadaPasta
      */
-    public void setListaJSPOutrasPasta(ArrayList listaJSPOutrasPasta) {
-         String controlo="jsp";
-        this.listaJSPOutrasPasta = lerConteudoPasta(listaJSPOutrasPasta, getPathOther(), controlo);
+    public void setListaNomesFicheirosDeCadaPasta(
+            ArrayList<ArrayList<String>> listaNomesFicheirosDeCadaPasta) {
+        this.listaNomesFicheirosDeCadaPasta = listaNomesFicheirosDeCadaPasta;
     }
 
-    public ArrayList<StringBuilder> getListaCompletaJSPOutraPasta() {
-        return listaCompletaJSPOutraPasta;
-    }
-    /* Set do atributo ListaCompletaJSPOutraPasta que ira chamar o metodo 
-     * lerConteudoFicheiro para preencher a Lista com o conteudo referente 
-     * à lista e à path definidos nos argumentos desse metodo.
+    /**
+     * Setter do parametro listaConteudoFicheiroDeCadaPasta
+     *
+     * @param listaConteudoFicheiroDeCadaPasta
      */
-    public void setListaCompletaJSPOutraPasta(ArrayList<StringBuilder> listaCompletaJSPOutraPasta) {
-        this.listaCompletaJSPOutraPasta = lerConteudoFicheiro(listaJSPOutrasPasta, getPathOther());
+    public void setListaConteudoFicheiroDeCadaPasta(
+            ArrayList<ArrayList<StringBuilder>> listaConteudoFicheiroDeCadaPasta) {
+        this.listaConteudoFicheiroDeCadaPasta = listaConteudoFicheiroDeCadaPasta;
     }
 
-    public ArrayList getListaJavaOutraPasta() {
-        return listaJavaOutraPasta;
-    }
-    /* Set do atributo ListaJavaOutraPasta que irá chama o metodo lerConteudoPasta 
-     * para preencher a Lista com o conteúdo referente à pasta definida na 
-     * atributo path. atributo de controlo para durante o ciclo do metodo 
-     * lerConteudoPasta saber que ficheiros há-de adicionar à Lista.
+    /**
+     * metodo auxiliar que itera sobre a array de paths, adiciona a cada lista
+     * de listas dos argumentos preenche as repectivas listas
      */
-    public void setListaJavaOutraPasta(ArrayList listaJavaOutraPasta) {
-        String controlo="javaOutra";
-        this.listaJavaOutraPasta = lerConteudoPasta(listaJavaOutraPasta, getPathOther(), controlo);
+    private void populateLista() {
+        for (int i = 0; i < listaPaths.size(); i++) {
+            listaNomesFicheirosDeCadaPasta.add(
+                    lerConteudoPasta(new ArrayList(), listaPaths.get(i)));
+            listaConteudoFicheiroDeCadaPasta.add(lerConteudoFicheiro(
+                    listaNomesFicheirosDeCadaPasta.get(i), listaPaths.get(i)));
+        }
     }
 
-    public ArrayList<StringBuilder> getListaCompletaJavaOutraPasta() {
-        return listaCompletaJavaOutraPasta;
-    }
-    /* Set do atributo ListaCompletaJavaOutraPasta que irá chamar o metodo 
-     * lerConteudoFicheiro para preencher a Lista com o conteúdo referente 
-     * à lista e à path definidos nos argumentos desse metodo.
+    /**
+     * Metodo que le o conteudo da pasta com a path definida no parametro path,
+     * consoante a string controlo e coloca esses elementos na lista
+     * aSerPreenchida
+     *
+     * @param aSerPreenchida - lista que recebe os elemento lidos
+     * @param path - path para o file que irá ser lido
+     * @param controlo - string de controlo para controlar o que irah constar na
+     * Lista
+     * @return Lista preenchida com os elementos correctos
      */
-    public void setListaCompletaJavaOutraPasta(ArrayList<StringBuilder> listaCompletaJavaOutraPasta) {
-        this.listaCompletaJavaOutraPasta = lerConteudoFicheiro(listaJavaOutraPasta, getPathOther());
-    }
+    private ArrayList lerConteudoPasta(ArrayList aSerPreenchida,
+            String path) {
 
-    /*metodo que recebe 3 argumentos. */
-    private ArrayList lerConteudoPasta(ArrayList aSerPreenchida, String path, String controlo){
-        try{
-            File folder= new File(path);
-            String [] sArray= folder.list();
-            aSerPreenchida= new ArrayList();
-            String ext1= ".j";
-            String ext2=".jspage";
+        try {
+            File folder = new File(path);
+            String [] sArray = folder.list();
+            aSerPreenchida = new ArrayList();
+            String ext1 = ".j";
+            String ext2 = ".jspage";
 
-           if(controlo.equals("java")){
-               for(int i=0; i<sArray.length; i++){
-                if(sArray[i].endsWith(ext1)){
-                    aSerPreenchida.add(sArray[i]);
-                    //System.out.println("Java" + aSerPreenchida);
-                    }
+            for (String str : sArray) {
+                if (str.endsWith(ext1)) {
+                    aSerPreenchida.add(str);
                 }
-    
-           }else if(controlo.equals("jsp")){
-                for(int i=0; i<sArray.length; i++){
-                if(sArray[i].endsWith(ext2)){
-                    aSerPreenchida.add(sArray[i]);
-                    // System.out.println("JSP");
-                    }
+                if (str.endsWith(ext2)) {
+                    aSerPreenchida.add(str);
                 }
-               
-           } else if(controlo.equals("javaOutra")){
-               for(int i=0; i<sArray.length; i++){
-                if(sArray[i].endsWith(ext1)){
-                    aSerPreenchida.add(sArray[i]);
-                   // System.out.println("Other");
-                    }
-                }
-           }    
-        }catch(Exception e){   
+            }
+
+        } catch (Exception e) {
             Logger.getLogger(ReadTextBeanFormat.class.getName()).log(Level.SEVERE, null, e);
         }
         return aSerPreenchida;
     }
-    
-    /*metodo que recebe 2 argumentos*/
-    private ArrayList<StringBuilder> lerConteudoFicheiro(ArrayList listaPreenchida, String path){
-            
-        ArrayList<StringBuilder> listaSerDevolvida= new ArrayList();
-        String temp1=null;
-        List l= listaPreenchida;
-        BufferedReader ler;
-            
-                for(Object o:l){
-                    StringBuilder s= new StringBuilder();
-                    try {
-                        String temp=(String)o;
-                        File ficheiros= new File(path, temp);
-                        ler=new BufferedReader(new FileReader(ficheiros));
-                        while((temp1=ler.readLine())!=null){
-                           s.append(temp1 + "\n");     
-                    }
-                    }catch (IOException ex) {
-                    Logger.getLogger(ReadTextBeanFormat.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                   listaSerDevolvida.add(s);
-                }
 
+    /**
+     * metodo que le o conteudo e cada elemento da lista
+     *
+     * @param listaPreenchida - lista preenchida com todos os elementos que vao
+     * ser lidos
+     * @param path - path onde estao os lemento que vao ser lidos
+     * @return lista com os elementos foram lidos
+     */
+    private ArrayList<StringBuilder> lerConteudoFicheiro(
+            ArrayList listaPreenchida, String path) {
+
+        ArrayList<StringBuilder> listaSerDevolvida
+                = new ArrayList<StringBuilder>();
+        String temp1;
+        BufferedReader ler;
+
+        for (Object object : listaPreenchida) {
+            StringBuilder sb = new StringBuilder();
+            try {
+                String temp = (String) object;
+                File ficheiros = new File(path, temp);
+                ler = new BufferedReader(new FileReader(ficheiros));
+
+                while ((temp1 = ler.readLine()) != null) {
+                    sb.append(temp1).append("\n");
+                }
+                ler.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ReadTextBeanFormat.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+            listaSerDevolvida.add(sb);
+        }
         return listaSerDevolvida;
     }
 
