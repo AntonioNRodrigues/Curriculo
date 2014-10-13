@@ -14,6 +14,7 @@
             <c:set var="loopCounter2" value= "0" scope="application"/> 
             <c:set var="loopCounter3" value= "0" scope="application"/> 
             <c:set var="loopCounter4" value= "0" scope="application"/> 
+            <c:set var="loopCounter5" value= "0" scope="application"/> 
             <c:forEach var="linha" items="${pageScope.result.rows}" varStatus="loopCounter">
                 <c:if test="${linha.ArticleNumber == '1'}">
                     <div id="${linha.ArticleNumber}" style="display: none"> 
@@ -45,6 +46,14 @@
                         <time>${linha.Date}</time>
                         <p>${linha.Comment}</p>
                         <c:set var="loopCounter4" value="${loopCounter4+1}" scope="application"/>
+                    </div>
+                </c:if>
+                <c:if test="${linha.ArticleNumber == '5'}">
+                    <div id="${linha.ArticleNumber}" style="display: none"> 
+                        <h5>${linha.Name}</h5>
+                        <time>${linha.Date}</time>
+                        <p>${linha.Comment}</p>
+                        <c:set var="loopCounter4" value="${loopCounter5+1}" scope="application"/>
                     </div>
                 </c:if>
             </c:forEach>
