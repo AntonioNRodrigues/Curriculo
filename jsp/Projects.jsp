@@ -56,14 +56,15 @@
                     new ReadTextDefinePath(this.getServletContext().getRealPath("/ClassesSiteJava"),
                             this.getServletContext().getRealPath("/ClassesSiteJSP"),
                             this.getServletContext().getRealPath("/Articles/LabP/Calculadora"),
-                            this.getServletContext().getRealPath("/Articles/LabP/Impressora"));
+                            this.getServletContext().getRealPath("/Articles/LabP/Impressora"),
+                            this.getServletContext().getRealPath("/Articles/LabP/Analista"));
 
                 } catch (ServletException se) {
                     System.err.println(se);
                 }
 
             }
-                    %> 
+                                %> 
 
         <sql:setDataSource var="dataBase" driver="${MyCon.driver}"
                            url="${MyCon.linkServer}" user="${MyCon.userServer}" 
@@ -135,6 +136,8 @@
 
                 <article class="col-md-4" accesskey="3"><%@include file="Articles/LabP/Impressora/Impressora.jsp" %></article>
 
+                <article class="col-md-4" accesskey="5"><%@include file="Articles/LabP/Analista/Analista.jsp" %></article>
+
                 <article id="especialNumber4" class="col-md-4" accesskey="4"><%@include file="Articles/Exemplos/SimpleInsertUserDB.jsp" %></article>
 
             </div>
@@ -164,7 +167,12 @@
             <c:forEach var ="textoJava" items="${read.listaConteudoFicheiroDeCadaPasta.get(3)}">
                 <textarea class ="java" rows="30" cols="94" readonly="readonly">${textoJava}</textarea><br>
             </c:forEach>
-        </div>     
+        </div>
+        <div class="classesJava" style="display:none">
+            <c:forEach var ="textoJava" items="${read.listaConteudoFicheiroDeCadaPasta.get(4)}">
+                <textarea class ="java" rows="30" cols="94" readonly="readonly">${textoJava}</textarea><br>
+            </c:forEach>
+        </div>  
 
         <%@include file="footer.jsp" %>
 
