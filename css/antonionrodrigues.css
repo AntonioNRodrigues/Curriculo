@@ -17,28 +17,26 @@
     position:fixed;
     top:0; bottom:0; left:0; right:0;
     background-color: #000;
-    margin: auto;
-    max-width: 1280px;
+    margin: 0;
+    width: 100%;
     font-family: 'Oswald', 'Helvetica Neue', Helvetica;
 }
 #imagemBackground {
     position: static;
-    max-width: 83%; /*1056px*/
-    max-height: 70%;
+    max-width: 70%; /*1056px*/
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;/*68px;*/
+    margin-top: 2%;
 }
 
 #imagemJavaWork, #imagemPCurriculum, #imagemAboutMe{
     position: static;
-    max-width: 74%; 
-    max-height: 70%;
+    max-width: 62%; 
     display: none;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;/*68px;*/ 
+    margin-top: 2%;
     border: 3px solid #CD6600;
 
 }
@@ -52,7 +50,7 @@
     position: relative; 
     max-width: 20%;
     height: auto;
-    left: 18%;
+    left: 20%;
     color: #ff8f00;
     text-align: center;
     margin: auto 2%;
@@ -75,17 +73,22 @@
     position:fixed;
     bottom: 0;
     border-top-width: thick;
-    border-top: 5px #ff8f00 groove;
+    border-top: 3px #ff8f00 groove;
     margin-top: 0%;
 
 }
 #footerFrontPage p{               
     text-align: end;
-    margin-right: 15px;
+    margin-right: 1%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    
 }
 #footerFrontPage a{
     color: orange;
     text-decoration: none;
+    font-size: 14px;
+   
 }
 /****************************************************
  *                                                  *                
